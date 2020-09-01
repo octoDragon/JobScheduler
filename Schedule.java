@@ -11,7 +11,6 @@
 
 public class Schedule {
     public static void main(String[] args) {
-        //test to see if working :)
-        //asjdfkljs;dlkfj 
+        //my first actual commit solo
     }
 }
