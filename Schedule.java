@@ -1,23 +1,26 @@
-import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
 
 import java.util.LinkedList;
 
 public class Schedule {
-    public static void main(String[] args) {
-        LinkedList<String> collection = new LinkedList<String>();
-        Queue<Employee> employeeQueue = new Queue<Employee>();
-        double numberOfEmployees = 0;
+    //parameters
+    static LinkedList<Integer> collection = new LinkedList<Integer>();
+    static Employee pq[];
+    static double numberOfEmployees = 0;
 
+    //methods
+    public static Employee[] makePQArray(LinkedList<Integer> collection,
+                                         Employee[] pq,
+                                         double numberOfEmployees) {
         //reading in the data using StdIn
         while (!StdIn.isEmpty()) {
             numberOfEmployees += 0.25; // each employee has four components
-            String s = StdIn.readString();
-            collection.add(s);
+            int i = Integer.parseInt(StdIn.readString());
+            collection.add(i);
         }
 
-        String[] employeeElements = new String[(int) numberOfEmployees * 4];
+        pq = new Employee[(int) numberOfEmployees];
+        Integer[] employeeElements = new Integer[(int) numberOfEmployees * 4];
         for (int i = 0; i < employeeElements.length; i++) {
             employeeElements[i] = collection.removeFirst();
         }
@@ -30,28 +33,57 @@ public class Schedule {
             employee.prio = employeeElements[k + 1];
             employee.arrivalTime = employeeElements[k + 2];
             employee.duration = employeeElements[k + 3];
-            employeeQueue.enqueue(employee);
+            pq[i] = employee;
         }
 
-        for (Object employee : employeeQueue) {
-            Employee item = employeeQueue.dequeue();
-            StdOut.print(item.jobNumber + " ");
-            StdOut.print(item.prio + " ");
-            StdOut.print(item.arrivalTime + " ");
-            StdOut.println(item.duration);
-        }
+        return pq;
+    }
 
-        //making a queue of employees . . . TODO Soon to be a priority queue : )
-        //for (int i = 0; i > numberOfEmployees; i++) {
-        //makeEmployee
-        //Employee employee = new Employee();
-        // for (int k = 0; k > collection.size(); k += 4) {
+    public static Employee[] Sort(Employee[] pq) {
+        for (int i = 1; i < pq.length; i++) {
+            for (int j = i; j > 0 && Less(pq, pq[j], pq[j - 1]); j--) {
+                Exch(pq, j, j - 1);
+            }
+        }
+        return pq;
+    }
+
+    //probably have to make this sorting work with the 'while'
+    public static boolean Less(Employee[] pq, Employee moving, Employee comparing) {
+        if (comparing.arrivalTime > moving.arrivalTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void Exch(Employee[] pq, int moving, int comparing) {
+        Employee temp = pq[moving];
+        pq[moving] = pq[comparing];
+        pq[comparing] = temp;
+
+    }
+
+    public static void main(String[] args) {
+        Employee[] array = makePQArray(collection, pq, numberOfEmployees);
+        // for (Employee p : array) {
+        //     StdOut.println(p.arrivalTime);
         //
         // }
-        // employeeQueue.enqueue(employee);
+        //StdOut.println("-----------");
+        Schedule.Sort(array);
+        // for (Employee p : array) {
+        //     StdOut.println(p.arrivalTime);
+        // }
     }
-    //add employee to employeeQueue
-
 }
 
-//}
+// for (Employee p : array) {
+//         StdOut.print(p.jobNumber + " ");
+//         StdOut.print(p.prio + " ");
+//         StdOut.print(p.arrivalTime + " ");
+//         StdOut.print(p.duration + " ");
+//         StdOut.println();
+//         }
+
+
+

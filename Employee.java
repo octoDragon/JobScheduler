@@ -1,10 +1,14 @@
 public class Employee {
-    String jobNumber;
-    String prio;
-    String arrivalTime;
-    String duration;
+    int jobNumber;
+    int prio;
+    int arrivalTime;
+    int duration;
 
     public Employee() {
+    }
+
+    public static void DoSomething() {
+
     }
 
 }
