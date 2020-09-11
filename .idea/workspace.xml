@@ -42,7 +42,7 @@
     <property name="ToolWindowMessages.ShowToolbar" value="false" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="settings.saveactions" />
+    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
   <component name="RunManager" selected="Application.HelloWorld">
     <configuration name="HelloWorld" type="Application" factoryName="Application">
@@ -70,6 +70,10 @@
     </todo-panel>
   </component>
   <component name="WindowStateProjectService">
+    <state x="326" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599798866988">
+      <screen x="45" y="23" width="1395" height="877" />
+    </state>
+    <state x="326" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/45.23.1395.877@45.23.1395.877" timestamp="1599798866988" />
     <state width="1449" height="302" key="GridCell.Tab.0.bottom" timestamp="1596739896224">
       <screen x="0" y="23" width="2560" height="1352" />
     </state>
@@ -86,5 +90,13 @@
       <screen x="0" y="23" width="2560" height="1352" />
     </state>
     <state width="1449" height="302" key="GridCell.Tab.0.right/0.23.2560.1352@0.23.2560.1352" timestamp="1596739896223" />
+    <state x="227" y="74" key="SettingsEditor" timestamp="1599793317352">
+      <screen x="45" y="23" width="1395" height="877" />
+    </state>
+    <state x="227" y="74" key="SettingsEditor/45.23.1395.877@45.23.1395.877" timestamp="1599793317352" />
+    <state x="407" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599777574378">
+      <screen x="45" y="23" width="1395" height="877" />
+    </state>
+    <state x="407" y="213" width="670" height="676" key="search.everywhere.popup/45.23.1395.877@45.23.1395.877" timestamp="1599777574378" />
   </component>
 </project>
