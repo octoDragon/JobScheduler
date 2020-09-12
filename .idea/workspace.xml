@@ -25,6 +25,7 @@
   <component name="FindBugs-IDEA-Workspace">
     <analyzeAfterCompile>true</analyzeAfterCompile>
     <toolWindowToFront>false</toolWindowToFront>
+    <toolWindowEditorPreview>false</toolWindowEditorPreview>
   </component>
   <component name="ProjectId" id="1fgv093tBlCz5kVwNUWnMWmZD3X" />
   <component name="ProjectViewState">
@@ -42,7 +43,12 @@
     <property name="ToolWindowMessages.ShowToolbar" value="false" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.HelloWorld">
     <configuration name="HelloWorld" type="Application" factoryName="Application">
@@ -90,13 +96,15 @@
       <screen x="0" y="23" width="2560" height="1352" />
     </state>
     <state width="1449" height="302" key="GridCell.Tab.0.right/0.23.2560.1352@0.23.2560.1352" timestamp="1596739896223" />
-    <state x="227" y="74" key="SettingsEditor" timestamp="1599793317352">
-      <screen x="45" y="23" width="1395" height="877" />
+    <state x="188" y="74" key="SettingsEditor" timestamp="1599879393872">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="227" y="74" key="SettingsEditor/45.23.1395.877@45.23.1395.877" timestamp="1599793317352" />
-    <state x="407" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599777574378">
-      <screen x="45" y="23" width="1395" height="877" />
+    <state x="188" y="74" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1599879393872" />
+    <state x="227" y="74" key="SettingsEditor/45.23.1395.877@45.23.1395.877" timestamp="1599832775599" />
+    <state x="408" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599852151070">
+      <screen x="46" y="23" width="1394" height="877" />
     </state>
-    <state x="407" y="213" width="670" height="676" key="search.everywhere.popup/45.23.1395.877@45.23.1395.877" timestamp="1599777574378" />
+    <state x="407" y="213" width="670" height="676" key="search.everywhere.popup/45.23.1395.877@45.23.1395.877" timestamp="1599849883066" />
+    <state x="408" y="213" width="670" height="676" key="search.everywhere.popup/46.23.1394.877@46.23.1394.877" timestamp="1599852151070" />
   </component>
 </project>
