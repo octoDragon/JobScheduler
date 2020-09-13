@@ -13,12 +13,9 @@ public class JobScheduler {
     static int pqCounter = 0;
     static int jobInfoCounter = 0;
 
-    //Standard Input working in conjunction with Linked List
-    //to read in all of the data and then assign it to 'Job'
-    //objects in pairs of four, which fit into the array I
-    //use as the priority queue
+    //reads in data from a file and creates job objects in an array
     public static Job[] makePQArray(LinkedList<Integer> collection,
-                                    Job[] pq,
+                                    Job[] jobInfo,
                                     double numberOfEmployees) {
         //reading in the data using StdIn
         while (!StdIn.isEmpty()) {
@@ -27,12 +24,13 @@ public class JobScheduler {
             collection.add(i); //adding the integers to the LL
         }
 
-        pq = new Job[(int) numberOfEmployees];
+        jobInfo = new Job[(int) numberOfEmployees]; //creating array with specific size
         Integer[] employeeElements = new Integer[(int) numberOfEmployees * 4];
-        for (int i = 0; i < employeeElements.length; i++) {
+        for (int i = 0; i < employeeElements.length; i++) { //taking info. out of LL
             employeeElements[i] = collection.removeFirst();
         }
 
+        //creating each job object with instance variables assigned to the ints read in
         for (int i = 0; i < numberOfEmployees; i++) {
             int k = i;
             k *= 4;
@@ -41,12 +39,13 @@ public class JobScheduler {
             job.prio = employeeElements[k + 1];
             job.arrivalTime = employeeElements[k + 2];
             job.duration = employeeElements[k + 3];
-            pq[i] = job;
+            jobInfo[i] = job;
         }
 
-        return pq;
+        return jobInfo;
     }
 
+    //uses insertion sort to determine correct positioning in pq and jobInfo arrays
     public static Job[] sort(Job[] pq, int length) {
         for (int i = 1; i < length; i++) {
             for (int j = i; j > 0 && less(pq, pq[j], pq[j - 1]); j--) {
@@ -56,6 +55,7 @@ public class JobScheduler {
         return pq;
     }
 
+    //compares jobs arrival time or prioirty depending on time
     public static boolean less(Job[] array, Job moving, Job comparing) {
         if (comparing == null) {
             return true;
@@ -73,6 +73,7 @@ public class JobScheduler {
         return false;
     }
 
+    //exchanges jobs
     public static void exch(Job[] pq, int moving, int comparing) {
         Job temp = pq[moving];
         pq[moving] = pq[comparing];
@@ -80,11 +81,54 @@ public class JobScheduler {
 
     }
 
-    //essentially 'pops' or deletes the employee from the array; sets prio to -1
+    //inserts jobs into my pq
+    public static void insert(Job[] pq, Job job) {
+        Job p = job;
+        pq[pqCounter] = p;
+        pqCounter++;
+        JobScheduler.sort(pq, pqCounter);
+    }
 
+    //keeps track of how much more a job needs to work
+    public static void decrement() {
+        pq[0].duration--;
+
+        //calculating waiting time instance variable
+        if (pq[0].waitingTime == 0) {
+            pq[0].waitingTime = (time - pq[0].arrivalTime);
+        }
+        //checks if a job has worked its entire time
+        if (pq[0].duration == 0) {
+            JobScheduler.removeMax();
+        }
+    }
+
+    //removed jobs from the pq when they have worked their full duration
+    public static void removeMax() {
+        Job removedJob = pq[0];
+        pq[0] = null;
+        pqCounter--;
+        JobScheduler.sort(pq, pqCounter + 1);
+        JobScheduler.format(removedJob);
+    }
+
+    //formating for standard output
+    public static void format(Job person) {
+        StdOut.println(
+                "Person: " + person.jobNumber +
+                        " Arrival: " + person.arrivalTime +
+                        " WaitingTime: " + (person.waitingTime - 1) +
+                        " ExecutionTime: " + ((time + 1) - (person.arrivalTime + (person.waitingTime
+                        - 1))) +
+                        " Finish Time: " + (time + 1));
+
+    }
+
+    //determins who works when, implements all the other methods
     public static void runSchedule(Job[] pq, Job[] jobInfo) {
         boolean completion = false;
         JobScheduler.sort(jobInfo, pq.length); //sorts jobs based on arrival time
+
         while (!completion) {
             time++;
             //checks if people need to be added to the pq
@@ -96,76 +140,22 @@ public class JobScheduler {
                 }
             }
 
-            else if (pq[0] != null) {
+            //when somone is working, subtract 1 from the amount of work left
+            if (pq[0] != null) {
                 JobScheduler.decrement();
             }
 
             //if nothing in pq, after job has joined it, end the program
             else if (pq[0] == null && time > jobInfo[jobInfo.length - 1].arrivalTime) {
                 completion = true;
-                StdOut.println("finished");
             }
-
-        }
-
-
-    }
-
-
-    public static void insert(Job[] pq, Job job) {
-        Job p = job;
-        pq[pqCounter] = p;
-        pqCounter++;
-        JobScheduler.sort(pq, pqCounter);
-    }
-
-    public static void decrement() {
-        pq[0].duration--;
-        if (pq[0].duration == 0) {
-            StdOut.println(pq[0].jobNumber + " " + time);
-            JobScheduler.removeMax();
         }
     }
 
-    public static void removeMax() {
-        Job removedJob = pq[0];
-        pq[0] = null;
-        pqCounter--;
-        JobScheduler.sort(pq, pqCounter);
-        // JobScheduler.format(removedJob);
-    }
-
-    public static void format(Job person, int workDuration) {
-        StdOut.println(
-                "Person: " + person.jobNumber +
-                        " Priority: " + person.prio +
-                        " Arrival: " + person.arrivalTime +
-                        " ExecutionTime: " + person.duration +
-                        " WaitingTime: " + JobScheduler.time +
-                        " Ended: " + workDuration);
-
-    }
-
+    //main
     public static void main(String[] args) {
         jobInfo = makePQArray(collection, jobInfo, numberOfEmployees);
         pq = new Job[jobInfo.length];
         JobScheduler.runSchedule(pq, jobInfo);
     }
 }
-
-// for (Job p : pq) {
-//     StdOut.print(p.jobNumber + " ");
-//     StdOut.print(p.prio + " ");
-//     StdOut.print(p.arrivalTime + " ");
-//     StdOut.print(p.duration + " ");
-//     StdOut.println();
-// }
-
-// if (pq[0] != null) {
-//     if (JobScheduler.time != jobInfo[jobInfoCounter].arrivalTime
-//             && pq[0] != null) {
-//         //StdOut.println(jobInfoCounter);
-//         JobScheduler.decrement(pq[0]);
-//         //knows which item finishes first, but it doesn't continue onto the next one'
-//     }
-// }
