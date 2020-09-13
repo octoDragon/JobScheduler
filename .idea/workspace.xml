@@ -104,9 +104,10 @@
     </state>
     <state x="188" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1600012102177" />
     <state x="227" y="74" key="SettingsEditor/45.23.1395.877@45.23.1395.877" timestamp="1599832775599" />
-    <state x="408" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599852151070">
-      <screen x="46" y="23" width="1394" height="877" />
+    <state x="374" y="213" width="693" height="676" key="search.everywhere.popup" timestamp="1600029621645">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state x="374" y="213" width="693" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1600029621645" />
     <state x="407" y="213" width="670" height="676" key="search.everywhere.popup/45.23.1395.877@45.23.1395.877" timestamp="1599849883066" />
     <state x="408" y="213" width="670" height="676" key="search.everywhere.popup/46.23.1394.877@46.23.1394.877" timestamp="1599852151070" />
   </component>

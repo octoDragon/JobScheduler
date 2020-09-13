@@ -1,4 +1,4 @@
-import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.LinkedList;
@@ -14,13 +14,13 @@ public class JobScheduler {
     static int jobInfoCounter = 0;
 
     //reads in data from a file and creates job objects in an array
-    public static Job[] makePQArray(LinkedList<Integer> collection,
-                                    Job[] jobInfo,
-                                    double numberOfEmployees) {
+    public static Job[] makeInfoArray(In in, LinkedList<Integer> collection,
+                                      Job[] jobInfo,
+                                      double numberOfEmployees) {
         //reading in the data using StdIn
-        while (!StdIn.isEmpty()) {
+        while (!in.isEmpty()) {
             numberOfEmployees += 0.25; // each employee has four components
-            int i = Integer.parseInt(StdIn.readString());
+            int i = Integer.parseInt(in.readString());
             collection.add(i); //adding the integers to the LL
         }
 
@@ -116,11 +116,14 @@ public class JobScheduler {
     public static void format(Job person) {
         StdOut.println(
                 "Person: " + person.jobNumber +
+                        " Priority: " + person.prio +
+                        " Duration " + ((time + 1) - ((person.waitingTime - 1)
+                        + person.arrivalTime)) +
                         " Arrival: " + person.arrivalTime +
                         " WaitingTime: " + (person.waitingTime - 1) +
                         " ExecutionTime: " + ((time + 1) - (person.arrivalTime + (person.waitingTime
                         - 1))) +
-                        " Finish Time: " + (time + 1));
+                        " FinishTime: " + (time + 1));
 
     }
 
@@ -154,7 +157,8 @@ public class JobScheduler {
 
     //main
     public static void main(String[] args) {
-        jobInfo = makePQArray(collection, jobInfo, numberOfEmployees);
+        In in = new In(args[0]);
+        jobInfo = makeInfoArray(in, collection, jobInfo, numberOfEmployees);
         pq = new Job[jobInfo.length];
         JobScheduler.runSchedule(pq, jobInfo);
     }
