@@ -43,6 +43,9 @@
     <property name="ToolWindowMessages.ShowToolbar" value="false" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -96,10 +99,10 @@
       <screen x="0" y="23" width="2560" height="1352" />
     </state>
     <state width="1449" height="302" key="GridCell.Tab.0.right/0.23.2560.1352@0.23.2560.1352" timestamp="1596739896223" />
-    <state x="188" y="74" key="SettingsEditor" timestamp="1599879393872">
+    <state x="188" y="63" key="SettingsEditor" timestamp="1599961750085">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="188" y="74" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1599879393872" />
+    <state x="188" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1599961750085" />
     <state x="227" y="74" key="SettingsEditor/45.23.1395.877@45.23.1395.877" timestamp="1599832775599" />
     <state x="408" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1599852151070">
       <screen x="46" y="23" width="1394" height="877" />

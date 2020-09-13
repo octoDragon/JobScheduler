@@ -57,22 +57,19 @@ public class JobScheduler {
     }
 
     public static boolean less(Job[] array, Job moving, Job comparing) {
-        if (time == 0) {
+        if (comparing == null) {
+            return true;
+        }
+        else if (time == 0) {
             if (comparing.arrivalTime > moving.arrivalTime) {
                 return true;
             }
         }
-
         else if (time >= 0) {
             if (moving.prio > comparing.prio && moving.prio > 0) {
                 return true;
             }
         }
-
-        //will need to add for the remove method
-        // if (comparing == null) {
-        //     return true;
-        // }
         return false;
     }
 
@@ -87,28 +84,33 @@ public class JobScheduler {
 
     public static void runSchedule(Job[] pq, Job[] jobInfo) {
         boolean completion = false;
-        JobScheduler.sort(jobInfo, pq.length); //sorts the arrivals into order
+        JobScheduler.sort(jobInfo, pq.length); //sorts jobs based on arrival time
         while (!completion) {
+            time++;
+            //checks if people need to be added to the pq
             if (jobInfoCounter < jobInfo.length) {
-                time++;
-                if (JobScheduler.time == jobInfo[jobInfoCounter].arrivalTime) {
+                //Insertion in qp
+                if (time == jobInfo[jobInfoCounter].arrivalTime) {
                     JobScheduler.insert(pq, jobInfo[jobInfoCounter]);
                     jobInfoCounter++;
                 }
-                else if (JobScheduler.time != jobInfo[jobInfoCounter].arrivalTime
-                        && pq[0] != null) {
-                    //StdOut.println(jobInfoCounter);
-                    JobScheduler.decrement(pq[0]);
-                    //knows which item finishes first, but it doesn't continue onto the next one'
-                }
-                else if (jobInfoCounter == jobInfo.length) {
-                    completion = true;
-                    StdOut.println("finished");
-                }
             }
+
+            else if (pq[0] != null) {
+                JobScheduler.decrement();
+            }
+
+            //if nothing in pq, after job has joined it, end the program
+            else if (pq[0] == null && time > jobInfo[jobInfo.length - 1].arrivalTime) {
+                completion = true;
+                StdOut.println("finished");
+            }
+
         }
 
+
     }
+
 
     public static void insert(Job[] pq, Job job) {
         Job p = job;
@@ -117,24 +119,20 @@ public class JobScheduler {
         JobScheduler.sort(pq, pqCounter);
     }
 
-    public static int decrement(Job job) {
-        job.duration--;
-        if (job.duration == 0) {
-            pqCounter--;
-            StdOut.println(job.jobNumber);
-            StdOut.println(jobInfoCounter);
-            //JobScheduler.removeMax(pq);
+    public static void decrement() {
+        pq[0].duration--;
+        if (pq[0].duration == 0) {
+            StdOut.println(pq[0].jobNumber + " " + time);
+            JobScheduler.removeMax();
         }
-        return job.duration;
     }
 
-    public static Job removeMax(Job[] pq) {
+    public static void removeMax() {
         Job removedJob = pq[0];
-        // JobScheduler.format(removedJob, workDuration);
-        // pq[0].prio = -1;
-        // return removedJob;
+        pq[0] = null;
         pqCounter--;
-        return removedJob;
+        JobScheduler.sort(pq, pqCounter);
+        // JobScheduler.format(removedJob);
     }
 
     public static void format(Job person, int workDuration) {
@@ -155,12 +153,6 @@ public class JobScheduler {
     }
 }
 
-//TODO: need to fix the last line of code not working properly with the start time
-//TODO: need to fix the formatting with propper name and everything DONE
-//TODO: need to change the priority from being small to large DONE
-//TODO: ask Mummy about the formatting
-//TODO: implement waiting time
-
 // for (Job p : pq) {
 //     StdOut.print(p.jobNumber + " ");
 //     StdOut.print(p.prio + " ");
@@ -169,10 +161,11 @@ public class JobScheduler {
 //     StdOut.println();
 // }
 
-// public static boolean LessArrivalTime(Job[] pq, Job moving, Job comparing) {
-//     if (comparing.arrivalTime > moving.arrivalTime) {
-//         return true;
+// if (pq[0] != null) {
+//     if (JobScheduler.time != jobInfo[jobInfoCounter].arrivalTime
+//             && pq[0] != null) {
+//         //StdOut.println(jobInfoCounter);
+//         JobScheduler.decrement(pq[0]);
+//         //knows which item finishes first, but it doesn't continue onto the next one'
 //     }
-//     return false;
 // }
-
